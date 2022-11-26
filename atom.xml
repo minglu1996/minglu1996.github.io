@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://minglu-xie.github.io/</id>
+    <title>Minglu Xie</title>
+    <updated>2022-11-26T11:22:15.172Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://minglu-xie.github.io/"/>
+    <link rel="self" href="https://minglu-xie.github.io/atom.xml"/>
+    <logo>https://minglu-xie.github.io/images/avatar.png</logo>
+    <icon>https://minglu-xie.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, Minglu Xie</rights>
+    <entry>
+        <title type="html"><![CDATA[Configure jupyter notebook settings in Linux server to achieve remote access]]></title>
+        <id>https://minglu-xie.github.io/post/configure-jupyter-notebook-settings-in-linux-server-to-achieve-remote-access/</id>
+        <link href="https://minglu-xie.github.io/post/configure-jupyter-notebook-settings-in-linux-server-to-achieve-remote-access/">
+        </link>
+        <updated>2022-11-02T23:58:36.000Z</updated>
+        <content type="html"><![CDATA[<p>I am doing my master thesis in SciLife lab, Uppsala University. We have our own Linux Server in the lab. Usually you don't have the root access which will make it difficult to configure Bioinformatic analysis environment sometimes.<br>
+Recently, my colleague want me to configure my own jupyter notebook setting and install <code>R</code> and <code>Python</code> to achieve remote access from local. Here I installed the <code>R420</code> and <code>python 3.11.0</code> for my jupyter notebook.<br>
+Notice: Mainly I used mamba instead of conda now. You can find how to use <a href="https://mamba.readthedocs.io/en/latest/user_guide/mamba.html">mamba</a>.</p>
+<p>Prerequisite to follow:<br>
+Basic knowledge of Linux.<br>
+Basic knowledge of conda/mamba.</p>
+<h2 id="setup"><strong>Setup</strong>:</h2>
+<ol>
+<li>Use an virtual environment, here I use my R420 virtual environment which I install <code>R4.2.0</code> version by using mamba/conda.</li>
+</ol>
+<pre><code>    Command line examples:
+    conda create --name r420                      #create the new environment with name r420
+    conda activate r420                           #activate the new environment
+    mamba install -c conda-forge r-base=4.2.0     #install R_4.2.0 version
+    mamba install python=3.11.0 -c conda-forge    #install Python_3.11.0
+</code></pre>
+<ol start="2">
+<li>Install <a href="https://jupyter.org/install">jupyter notebook</a>     <code>pip install notebook</code><br>
+#uninstall jupyter notebook with <code>pip uninstall notebook</code></li>
+<li>Generate the jupyter configure file <code>jupyter notebook --generate-config</code><img src="https://minglu-xie.github.io//post-images/1667991704280.png" alt="" loading="lazy"></li>
+<li>With the new version of jupyter, no need to generate the password from python. No need to set password in step 5.<br>
+Set the password <code>jupyter notebook password</code></li>
+<li>Configure the file generated in step 3: <code>jupyter_notebook_config.py</code></li>
+</ol>
+<pre><code>    Command used examples:
+    vim ~/.jupyter/jupyter_notebook_config.py
+    #you can either delete the #  or just write new lines.
+    c.NotebookApp.ip='*'
+    c.NotebookApp.open_browser =False 
+    c.NotebookApp.port =8998        
+    c.NotebookApp.allow_remote_access = True
+</code></pre>
+<ol start="6">
+<li>Run <code>jupyter notebook</code>.<br>
+Now you can access from you local browser by input the IP address and the port that you set. You need to unput the password that you set in Step 4.<br>
+Notice: You need to keep the command running or you can run <code>nohup jupyter notebook &amp;</code> to run it forever.</li>
+<li>Check the kernel in jupyter notebook <code>jupyter kernelspec list</code></li>
+</ol>
+<h3 id="install-r-kernel-in-jupyter-notebook"><strong>Install R kernel in jupyter notebook</strong></h3>
+<ul>
+<li>Usually you can just install the <a href="https://github.com/IRkernel/IRkernel">R-kernel</a> by <code>install.packages()</code> in R console.<br>
+But I met lots of errors and since I don't have the root access to solve the library requirements. So here I would suggest to use conda/mamba.</li>
+</ul>
+<pre><code>    mamba search r-irkernel                             #search r-irkernel
+    mamba install -c conda-forge r-irkernel=1.3.1       #install the newest version
+</code></pre>
+<ul>
+<li>
+<p>After installation of r-irkernel, we need to setup it in R console.<br>
+<code>IRkernel::installspec(name = 'R', displayname = 'R_4.2.0')</code></p>
+</li>
+<li>
+<p>Check the jupyter kernel, you should have two kernels now.<img src="https://minglu-xie.github.io//post-images/1667991631707.png" alt="" loading="lazy"></p>
+<p>Thank you for your reading!</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://minglu-xie.github.io/post/hello-gridea/</id>
+        <link href="https://minglu-xie.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="https://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
